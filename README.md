@@ -47,44 +47,71 @@ docker compose up -d --build
 
 ## Deploying on the VPS
 
-Prerequisite: your domain's DNS A record already points at the VPS's IP, and ports
-80/443 are free on the host (no existing reverse proxy).
+Prerequisite: your domain's DNS A record already points at the VPS's IP.
+
+**If port 80/443 on the VPS is already used by another reverse proxy** (common if
+the VPS hosts other sites/containers), don't fight over the port — pick a free
+host port for this container and let the existing reverse proxy forward to it.
 
 1. Copy this project to the VPS, e.g. via `git clone` or `scp -r`.
-2. From the project root:
-
+2. In `docker-compose.yml`, set the host-side port to something free, e.g.:
+   ```yaml
+   ports:
+     - "3480:80"   # left side = free host port, right side must stay 80
+   ```
+3. Start it:
    ```bash
    docker compose up -d --build
    ```
+4. Confirm the container itself answers: `curl -sI http://localhost:3480` should
+   return `HTTP/1.1 200 OK`.
+5. Add a server block to the **existing** host reverse proxy for this card's domain,
+   pointing at the port you chose, e.g. for host nginx in
+   `/etc/nginx/sites-available/` (or `conf.d/`):
+   ```nginx
+   server {
+       listen 80;
+       server_name card.yourdomain.com;
 
-3. Visit `http://yourdomain.com` from a phone to confirm it loads.
+       location / {
+           proxy_pass http://127.0.0.1:3480;
+           proxy_set_header Host $host;
+           proxy_set_header X-Real-IP $remote_addr;
+           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+           proxy_set_header X-Forwarded-Proto $scheme;
+       }
+   }
+   ```
+   Symlink it into `sites-enabled` if needed, then `sudo nginx -t && sudo systemctl reload nginx`.
+6. Visit `http://card.yourdomain.com` from a phone to confirm it loads.
+
+**If port 80/443 is free** (no existing reverse proxy), you can instead map this
+container directly to it (`"80:80"` in `docker-compose.yml`) and skip the extra
+server block.
 
 ### Adding HTTPS
 
 HTTPS is recommended since NFC taps open the link directly in Safari, and the
 "Save Contact" download works best on a secure origin.
 
-1. Stop the container temporarily so port 80 is free, then get a certificate:
-
-   ```bash
-   docker compose down
-   sudo certbot certonly --standalone -d yourdomain.com
-   ```
-
-2. Symlink or copy the resulting cert directory next to the project so it can be
-   volume-mounted, e.g. `sudo ln -s /etc/letsencrypt ./certs`.
-3. In `nginx/default.conf`, uncomment the `server { listen 443 ssl; ... }` block and
-   set `server_name` to your real domain.
-4. In `docker-compose.yml`, uncomment the `443:443` port mapping and the `./certs`
-   volume line.
-5. Rebuild and restart:
-
-   ```bash
-   docker compose up -d --build
-   ```
-
-6. Renew certs periodically (certbot sets up a systemd timer/cron by default); after
-   renewal, run `docker compose restart` so nginx picks up the new cert files.
+- **With an existing host reverse proxy** (the common case above): terminate TLS
+  there, not in this container. Run `sudo certbot --nginx -d card.yourdomain.com`
+  (or your proxy's equivalent) — it edits the server block from step 5 in place to
+  add the `443` listener and certs. Nothing in this project needs to change.
+- **Without an existing reverse proxy** (this container owns port 80/443 directly):
+  1. Stop the container temporarily so port 80 is free, then get a certificate:
+     ```bash
+     docker compose down
+     sudo certbot certonly --standalone -d yourdomain.com
+     ```
+  2. Symlink the cert directory next to the project: `sudo ln -s /etc/letsencrypt ./certs`.
+  3. In `nginx/default.conf`, uncomment the `server { listen 443 ssl; ... }` block
+     and set `server_name` to your real domain.
+  4. In `docker-compose.yml`, add `"443:443"` to `ports` and
+     `./certs:/etc/nginx/certs:ro` to `volumes`.
+  5. `docker compose up -d --build`.
+  6. Renew periodically (certbot's systemd timer/cron handles this); after renewal,
+     `docker compose restart` so nginx picks up the new cert files.
 
 ## NFC setup (writing your iPhone-taps-card link to a physical tag)
 

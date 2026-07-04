@@ -3,8 +3,11 @@ services:
     build: .
     restart: unless-stopped
     ports:
+      # <host-port>:80 — the container's nginx always listens on 80 internally,
+      # so the second number here must stay 80. Change only the host-side port
+      # (left of the colon) if 80/443 on the VPS are already taken by another
+      # reverse proxy — in that case, add a server block there that proxies to
+      # 127.0.0.1:<host-port>, see README.md.
       - "80:80"
-      # - "443:443"   # uncomment once the HTTPS server block is enabled in nginx/default.conf
     volumes:
       - ./config/config.json:/usr/share/nginx/html/config.json:ro
-      # - ./certs:/etc/nginx/certs:ro   # uncomment once you've obtained certs, see README.md
