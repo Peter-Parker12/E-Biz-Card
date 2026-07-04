@@ -8,23 +8,26 @@
   <link rel="stylesheet" href="css/main.css" />
 </head>
 <body>
-  <section class="card-front stripe-bg">
-    <div class="email" id="email-display"></div>
-    <div class="tagline" id="tagline-display"></div>
-  </section>
+  <main class="scroll-container" id="scroll-container">
+    <section class="page card-back stripe-bg" data-page>
+      <h1 class="name" id="name-display"></h1>
+      <p class="title" id="title-display"></p>
+    </section>
 
-  <section class="card-back stripe-bg">
-    <h1 class="name" id="name-display"></h1>
-    <p class="title" id="title-display"></p>
-  </section>
+    <section class="page card-front stripe-bg" data-page>
+      <div class="email" id="email-display"></div>
+      <div class="tagline" id="tagline-display"></div>
+    </section>
 
-  <section class="actions" id="actions">
-    <button class="btn" id="save-contact-btn" type="button">Save Contact</button>
-    <a class="btn secondary" id="email-link" hidden>Email Me</a>
-    <a class="btn secondary" id="call-link" hidden>Call</a>
-  </section>
-
-  <footer class="credit" id="credit-display"></footer>
+    <section class="page actions-page" data-page>
+      <div class="actions" id="actions">
+        <button class="btn" id="save-contact-btn" type="button">Save Contact</button>
+        <a class="btn secondary" id="email-link" hidden>Email Me</a>
+        <a class="btn secondary" id="call-link" hidden>Call</a>
+      </div>
+      <footer class="credit" id="credit-display"></footer>
+    </section>
+  </main>
 
   <script src="js/main.js"></script>
 </body>

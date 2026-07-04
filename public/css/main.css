@@ -6,6 +6,8 @@ html,
 body {
   margin: 0;
   padding: 0;
+  height: 100%;
+  overflow: hidden;
   font-family: var(--font-body);
   color: var(--color-text-primary);
   background: #fff;
@@ -15,9 +17,25 @@ body {
 body {
   max-width: 480px;
   margin: 0 auto;
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
+}
+
+.scroll-container {
+  height: 100svh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
+  perspective: 1400px;
+}
+
+.page {
+  height: 100svh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  position: relative;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
 }
 
 .stripe-bg {
@@ -33,8 +51,7 @@ body {
 
 .card-front,
 .card-back {
-  position: relative;
-  min-height: 60svh;
+  height: 100%;
   padding: 28px 24px;
   display: flex;
   flex-direction: column;
@@ -78,6 +95,14 @@ body {
   font-size: 1.05rem;
   color: var(--color-text-secondary);
   margin: 0;
+}
+
+.actions-page {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #fff;
 }
 
 .actions {
@@ -126,7 +151,6 @@ body {
 }
 
 footer.credit {
-  margin-top: auto;
   padding: 16px 24px calc(20px + env(safe-area-inset-bottom));
   text-align: center;
   font-size: 0.8rem;

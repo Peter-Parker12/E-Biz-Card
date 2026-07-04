@@ -73,4 +73,42 @@ function render(config) {
   document.getElementById("save-contact-btn").addEventListener("click", () => downloadVCard(config));
 }
 
+function initScrollRoll() {
+  const container = document.getElementById("scroll-container");
+  const pages = Array.from(container.querySelectorAll(".page"));
+  let ticking = false;
+
+  function update() {
+    const containerHeight = container.clientHeight;
+    const containerTop = container.getBoundingClientRect().top;
+
+    pages.forEach((page) => {
+      const offset = page.getBoundingClientRect().top - containerTop;
+      const progress = Math.max(-1, Math.min(1, offset / containerHeight));
+      const rotateX = progress * -90;
+      const opacity = 1 - Math.min(1, Math.abs(progress)) * 0.9;
+
+      page.style.transformOrigin = progress >= 0 ? "bottom center" : "top center";
+      page.style.transform = `rotateX(${rotateX}deg)`;
+      page.style.opacity = String(opacity);
+    });
+
+    ticking = false;
+  }
+
+  container.addEventListener(
+    "scroll",
+    () => {
+      if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    },
+    { passive: true }
+  );
+
+  update();
+}
+
+initScrollRoll();
 loadConfig().then(render).catch((err) => console.error("Failed to load config.json", err));
