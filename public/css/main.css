@@ -1,0 +1,135 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-body);
+  color: var(--color-text-primary);
+  background: #fff;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+.stripe-bg {
+  background-image: repeating-linear-gradient(
+      100deg,
+      rgba(255, 255, 255, var(--bg-stripe-contrast)) 0px,
+      rgba(255, 255, 255, var(--bg-stripe-contrast)) 14px,
+      rgba(0, 0, 0, 0) 14px,
+      rgba(0, 0, 0, 0) 34px
+    ),
+    linear-gradient(135deg, var(--bg-color-start), var(--bg-color-mid) 55%, var(--bg-color-end));
+}
+
+.card-front,
+.card-back {
+  position: relative;
+  min-height: 60svh;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-front .email {
+  font-family: var(--font-script);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--color-text-secondary);
+}
+
+.card-front .tagline {
+  align-self: flex-end;
+  font-family: var(--font-script);
+  font-size: 1.4rem;
+  color: var(--color-text-secondary);
+  text-align: right;
+  max-width: 80%;
+}
+
+.card-back {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+}
+
+.card-back .name {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.8rem;
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+
+.card-back .title {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.actions {
+  padding: 28px 24px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.actions .btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 18px;
+  border-radius: var(--button-radius);
+  background: var(--button-bg);
+  color: var(--button-text);
+  text-decoration: none;
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.actions .btn:active,
+.actions .btn:hover {
+  background: var(--button-bg-hover);
+}
+
+.actions .btn.secondary {
+  background: transparent;
+  color: var(--color-text-primary);
+  border: 1.5px solid var(--color-text-primary);
+}
+
+.actions .btn.secondary:hover,
+.actions .btn.secondary:active {
+  background: rgba(20, 35, 26, 0.06);
+}
+
+.actions .btn[hidden] {
+  display: none;
+}
+
+footer.credit {
+  margin-top: auto;
+  padding: 16px 24px calc(20px + env(safe-area-inset-bottom));
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  opacity: 0.7;
+}

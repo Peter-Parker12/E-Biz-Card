@@ -1,0 +1,10 @@
+services:
+  card:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      # - "443:443"   # uncomment once the HTTPS server block is enabled in nginx/default.conf
+    volumes:
+      - ./config/config.json:/usr/share/nginx/html/config.json:ro
+      # - ./certs:/etc/nginx/certs:ro   # uncomment once you've obtained certs, see README.md

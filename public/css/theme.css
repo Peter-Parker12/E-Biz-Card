@@ -1,0 +1,32 @@
+/*
+  Design tokens. Edit this file to restyle the card — no other file
+  should need to change for a color/font update.
+*/
+:root {
+  /* Gradient stripe background (matches the reference card) */
+  --bg-color-start: #f3fbf1;
+  --bg-color-mid: #a8e28a;
+  --bg-color-end: #55c23a;
+  --bg-stripe-count: 28;
+  --bg-stripe-contrast: 0.14;
+
+  /* Typography */
+  --font-heading: "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Helvetica Neue", Arial, sans-serif;
+  --font-script: "Segoe Script", "Bradley Hand", cursive;
+
+  /* Text colors */
+  --color-text-primary: #14231a;
+  --color-text-secondary: #2c3b30;
+  --color-text-on-dark: #f6fff2;
+
+  /* Card / surface */
+  --card-radius: 22px;
+  --card-shadow: 0 18px 40px rgba(20, 40, 20, 0.18);
+
+  /* Action buttons */
+  --button-bg: #14231a;
+  --button-bg-hover: #24382a;
+  --button-text: #f6fff2;
+  --button-radius: 999px;
+}

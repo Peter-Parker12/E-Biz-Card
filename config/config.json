@@ -1,0 +1,12 @@
+{
+  "name": "NHAT HAI DAO",
+  "title": "ART MANAGER",
+  "tagline": "Collecting People. Curating Possibilities",
+  "email": "haidn.4v@gmail.com",
+  "phone": "",
+  "links": [
+    { "label": "LinkedIn", "url": "", "icon": "linkedin" },
+    { "label": "Instagram", "url": "", "icon": "instagram" }
+  ],
+  "credit": "design by OURPEOPLE studio"
+}

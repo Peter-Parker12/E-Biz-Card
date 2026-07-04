@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Digital Business Card</title>
+  <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/main.css" />
+</head>
+<body>
+  <section class="card-front stripe-bg">
+    <div class="email" id="email-display"></div>
+    <div class="tagline" id="tagline-display"></div>
+  </section>
+
+  <section class="card-back stripe-bg">
+    <h1 class="name" id="name-display"></h1>
+    <p class="title" id="title-display"></p>
+  </section>
+
+  <section class="actions" id="actions">
+    <button class="btn" id="save-contact-btn" type="button">Save Contact</button>
+    <a class="btn secondary" id="email-link" hidden>Email Me</a>
+    <a class="btn secondary" id="call-link" hidden>Call</a>
+  </section>
+
+  <footer class="credit" id="credit-display"></footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
