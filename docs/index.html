@@ -19,7 +19,7 @@
             <span id="photo-initials"></span>
           </div>
           <div class="id-brand">
-            <div class="id-brand-name" id="brand-name"></div>
+            <a class="id-brand-name" id="brand-name" target="_blank" rel="noopener noreferrer"></a>
             <div class="id-brand-sub" id="brand-subtitle"></div>
             <ul class="id-tags" id="tags-list"></ul>
           </div>
@@ -33,20 +33,24 @@
               <span class="id-number" id="card-number-display"></span>
             </div>
           </div>
-          <div class="id-barcode">
+          <a class="id-barcode" id="barcode-link" target="_blank" rel="noopener noreferrer">
             <div class="barcode-bars"></div>
             <div class="barcode-text" id="id-number-display"></div>
-          </div>
+          </a>
         </div>
       </div>
     </section>
 
     <section class="page id-page" data-page>
       <div class="id-card id-back">
-        <div class="id-back-brand" id="brand-name-back"></div>
+        <div class="id-back-brand-block">
+          <a class="id-back-brand" id="brand-name-back" target="_blank" rel="noopener noreferrer"></a>
+          <a class="id-back-brand-secondary" id="brand-name-back-secondary" target="_blank" rel="noopener noreferrer"></a>
+        </div>
         <div class="id-stripe"></div>
         <div class="id-signature-row">
           <div class="id-signature-strip">
+            <img id="signature-img" alt="" hidden />
             <span id="signature-text"></span>
           </div>
           <span class="id-star">&#9733;</span>
@@ -61,11 +65,8 @@
     <section class="page id-page" data-page>
       <div class="id-card id-actions">
         <div class="id-watermark"></div>
-        <div class="actions" id="actions">
-          <button class="btn" id="save-contact-btn" type="button">Save Contact</button>
-          <a class="btn secondary" id="email-link" hidden>Email Me</a>
-          <a class="btn secondary" id="call-link" hidden>Call</a>
-        </div>
+        <button class="btn" id="save-contact-btn" type="button">Save Contact</button>
+        <div class="action-groups" id="action-groups"></div>
         <footer class="credit" id="credit-display"></footer>
       </div>
     </section>

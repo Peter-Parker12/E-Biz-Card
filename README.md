@@ -40,20 +40,25 @@ the latest version.
 
 ```json
 {
-  "brand": "OURPEOPLE",
+  "brand": "4V VIETNAM",
   "brandSubtitle": "Business Card",
-  "tags": ["Art Direction", "Curation", "Strategy", "Networking"],
-  "photo": "",
+  "tags": ["Creative Leadership in Arts Management", "Curation", "Strategy", "Networking"],
+  "photo": "assets/photo.jpg",
   "photoPosition": "center",
   "cardNumber": "01",
-  "idNumber": "770776",
+  "barcodeUrl": "https://your-portfolio-site.example/",
   "name": "NHAT HAI DAO",
   "title": "ART MANAGER",
   "tagline": "Collecting People. Curating Possibilities",
   "email": "haidn.4v@gmail.com",
   "phone": "",
-  "links": [{ "label": "LinkedIn", "url": "https://linkedin.com/in/...", "icon": "linkedin" }],
-  "credit": "design by OURPEOPLE studio"
+  "backBrandUrl": "https://your-brand-site.example/",
+  "backSecondaryText": "ONLYPANTS.VN",
+  "backSecondaryUrl": "https://your-other-brand-site.example/",
+  "guid": "3137434",
+  "signatureImage": "",
+  "links": [{ "label": "LinkedIn", "url": "https://linkedin.com/in/...", "icon": "linkedin", "category": "Professional" }],
+  "credit": "design by 4V VIETNAM studio"
 }
 ```
 
@@ -65,9 +70,28 @@ the latest version.
   an `object-fit: cover` crop, so the photo's aspect ratio may not match the
   box). Accepts any CSS `object-position` value, e.g. `"center"`, `"top"`,
   `"bottom"`, `"left"`, `"right"`, or precise offsets like `"50% 20%"`.
-- `cardNumber` and `idNumber` are the small numbers on the front/back (purely decorative, like the reference ID badge).
-- Empty `phone` or link `url` values are automatically hidden on the page.
-- `links[].icon` picks which icon shows: `"linkedin"`, `"instagram"`, `"twitter"`, or `"website"`.
+- `cardNumber` is the small decorative number next to the title on the front
+  (like the reference ID badge).
+- `barcodeUrl` makes the front card's barcode graphic a clickable link to that URL.
+- `backBrandUrl` makes the back card's brand name a clickable link.
+- `backSecondaryText`/`backSecondaryUrl` add a second linked line below the brand
+  name on the back (e.g. a second brand/site); leave `backSecondaryText` empty to
+  hide it.
+- `guid` shows as `GUID: <value>` both under the front card's barcode and on the
+  back card, in place of a plain serial number.
+- `signatureImage` is a path/URL to a signature image (e.g. `assets/signature.png`)
+  shown on the back card's signature strip; leave empty to fall back to your name
+  in a cursive font instead.
+- Empty `phone`, `backSecondaryText`, or link `url` values are automatically hidden.
+  (`phone` itself no longer renders a dedicated button — use a WhatsApp link instead.)
+- `links[].icon` picks which icon shows: `"linkedin"`, `"instagram"`, `"twitter"`,
+  `"website"`, `"whatsapp"`, or `"facebook"`. For WhatsApp, use a `https://wa.me/<countrycode+number>`
+  URL with no `+`, spaces, or leading zeros (e.g. `https://wa.me/84866427222`).
+- `links[].category` groups links together on the contact/save page under a small
+  label (e.g. `"Contact"`, `"Professional"`, `"Social"`), keeping the page compact
+  instead of one long list. Your `email` (if set) is automatically placed in the
+  `"Contact"` group. Any category name works; `"Contact"`, `"Professional"`, and
+  `"Social"` are shown first in that order, other category names appear after.
 
 Keep photos reasonably small (a few hundred KB) — this loads on a phone right
 after an NFC tap, so a multi-MB DSLR export will feel slow.

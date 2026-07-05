@@ -1,19 +1,28 @@
 {
-  "brand": "OURPEOPLE",
+  "brand": "4V VIETNAM",
   "brandSubtitle": "Business Card",
-  "tags": ["Art Direction", "Curation", "Strategy", "Networking"],
+  "tags": ["Creative Leadership in Arts Management", "Curation", "Strategy", "Networking"],
   "photo": "assets/_MG_7956.jpg",
-  "photoPosition": "top",
+  "photoPosition": "center",
   "cardNumber": "01",
-  "idNumber": "770776",
+  "barcodeUrl": "https://readymag.website/u3756789922/daonhathai/",
   "name": "NHAT HAI DAO",
   "title": "ART MANAGER",
   "tagline": "Collecting People. Curating Possibilities",
   "email": "haidn.4v@gmail.com",
-  "phone": "(+84) 399 498 006",
+  "phone": "",
+  "backBrandUrl": "https://4v.framer.website/",
+  "backSecondaryText": "ONLYPANTS.VN",
+  "backSecondaryUrl": "http://hamvcl.room.tilda.ws/",
+  "guid": "3137434",
+  "signatureImage": "assets/Signature.png",
   "links": [
-    { "label": "LinkedIn", "url": "https://www.linkedin.com/in/nhat-hai-dao-hanoi01/", "icon": "linkedin" },
-    { "label": "Instagram", "url": "https://www.instagram.com/hamvcl.dnh/", "icon": "instagram" }
+    { "label": "WhatsApp", "url": "https://wa.me/84866427222", "icon": "whatsapp", "category": "Contact" },
+    { "label": "Website", "url": "https://readymag.website/u3756789922/daonhathai/", "icon": "website", "category": "Professional" },
+    { "label": "LinkedIn", "url": "https://www.linkedin.com/in/nhat-hai-dao-hanoi01/", "icon": "linkedin", "category": "Professional" },
+    { "label": "Instagram (Personal)", "url": "https://www.instagram.com/hamvcl.dnh/", "icon": "instagram", "category": "Social" },
+    { "label": "Instagram (ONLYPANTS)", "url": "https://www.instagram.com/hamvcl.room/", "icon": "instagram", "category": "Social" },
+    { "label": "Facebook", "url": "https://www.facebook.com/daonhathai01", "icon": "facebook", "category": "Social" }
   ],
-  "credit": "design by OURPEOPLE studio"
+  "credit": "design by 4V VIETNAM studio"
 }
