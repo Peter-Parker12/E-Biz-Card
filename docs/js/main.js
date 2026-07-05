@@ -165,16 +165,7 @@ function render(config) {
   if (config.backSecondaryText) {
     backBrandSecondary.textContent = config.backSecondaryText;
     if (config.backSecondaryUrl) backBrandSecondary.href = config.backSecondaryUrl;
-  }
-
-  const signatureImg = document.getElementById("signature-img");
-  const signatureText = document.getElementById("signature-text");
-  if (config.signatureImage) {
-    signatureImg.src = config.signatureImage;
-    signatureImg.hidden = false;
-    signatureText.hidden = true;
-  } else {
-    signatureText.textContent = config.name || "";
+    document.getElementById("brand-sep").hidden = false;
   }
 
   document.getElementById("id-number-back").textContent = config.guid ? `GUID: ${config.guid}` : "";

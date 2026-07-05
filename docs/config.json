@@ -1,7 +1,7 @@
 {
   "brand": "4V VIETNAM",
   "brandSubtitle": "Business Card",
-  "tags": ["Creative Leadership in Arts Management", "Curation", "Strategy", "Networking"],
+  "tags": ["Creative Leadership", "Arts Management", "Curation", "Strategy", "Networking"],
   "photo": "assets/_MG_7956.jpg",
   "photoPosition": "center",
   "cardNumber": "01",
@@ -15,7 +15,6 @@
   "backSecondaryText": "ONLYPANTS.VN",
   "backSecondaryUrl": "http://hamvcl.room.tilda.ws/",
   "guid": "3137434",
-  "signatureImage": "assets/Signature.png",
   "links": [
     { "label": "WhatsApp", "url": "https://wa.me/84866427222", "icon": "whatsapp", "category": "Contact" },
     { "label": "Website", "url": "https://readymag.website/u3756789922/daonhathai/", "icon": "website", "category": "Professional" },

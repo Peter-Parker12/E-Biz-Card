@@ -42,7 +42,7 @@ the latest version.
 {
   "brand": "4V VIETNAM",
   "brandSubtitle": "Business Card",
-  "tags": ["Creative Leadership in Arts Management", "Curation", "Strategy", "Networking"],
+  "tags": ["Creative Leadership", "Arts Management", "Curation", "Strategy", "Networking"],
   "photo": "assets/photo.jpg",
   "photoPosition": "center",
   "cardNumber": "01",
@@ -56,7 +56,6 @@ the latest version.
   "backSecondaryText": "ONLYPANTS.VN",
   "backSecondaryUrl": "https://your-other-brand-site.example/",
   "guid": "3137434",
-  "signatureImage": "",
   "links": [{ "label": "LinkedIn", "url": "https://linkedin.com/in/...", "icon": "linkedin", "category": "Professional" }],
   "credit": "design by 4V VIETNAM studio"
 }
@@ -79,9 +78,6 @@ the latest version.
   hide it.
 - `guid` shows as `GUID: <value>` both under the front card's barcode and on the
   back card, in place of a plain serial number.
-- `signatureImage` is a path/URL to a signature image (e.g. `assets/signature.png`)
-  shown on the back card's signature strip; leave empty to fall back to your name
-  in a cursive font instead.
 - Empty `phone`, `backSecondaryText`, or link `url` values are automatically hidden.
   (`phone` itself no longer renders a dedicated button — use a WhatsApp link instead.)
 - `links[].icon` picks which icon shows: `"linkedin"`, `"instagram"`, `"twitter"`,
