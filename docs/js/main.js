@@ -168,6 +168,10 @@ function render(config) {
     document.getElementById("brand-sep").hidden = false;
   }
 
+  if (config.backTaglineImage) {
+    document.getElementById("tagline-graphic").src = config.backTaglineImage;
+  }
+
   document.getElementById("id-number-back").textContent = config.guid ? `GUID: ${config.guid}` : "";
   document.getElementById("name-display-back").textContent = config.name || "";
 

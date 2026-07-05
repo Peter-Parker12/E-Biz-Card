@@ -307,10 +307,10 @@ body {
   min-height: 0;
 }
 
-.id-star {
-  font-size: clamp(1.4rem, 6vw, 2rem);
-  color: var(--card-dark);
-  flex-shrink: 0;
+.id-tagline-graphic {
+  max-width: 80%;
+  max-height: 100%;
+  object-fit: contain;
 }
 
 .id-back-bottom {

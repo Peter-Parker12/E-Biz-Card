@@ -15,6 +15,7 @@
   "backSecondaryText": "ONLYPANTS.VN",
   "backSecondaryUrl": "http://hamvcl.room.tilda.ws/",
   "guid": "3137434",
+  "backTaglineImage": "assets/Text.png",
   "links": [
     { "label": "WhatsApp", "url": "https://wa.me/84866427222", "icon": "whatsapp", "category": "Contact" },
     { "label": "Website", "url": "https://readymag.website/u3756789922/daonhathai/", "icon": "website", "category": "Professional" },
