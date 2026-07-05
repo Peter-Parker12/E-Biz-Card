@@ -10,9 +10,9 @@ services:
       # 127.0.0.1:<host-port>, see README.md.
       - "3480:80"
     volumes:
-      # Mounts the whole directory (not just config.json) because bind-mounting
-      # a single file can get "stuck" on the old file after git pull/editors
-      # replace it (rename-over-original changes the inode). Mounting the
-      # directory avoids that — edits are picked up without recreating the
-      # container.
-      - ./config:/usr/share/nginx/html/config:ro
+      # Mounts the whole site directory (not just config.json) so any edit —
+      # content, styling, photos — is picked up live with no rebuild needed.
+      # Bind-mounting a single file can get "stuck" on the old file after git
+      # pull/editors replace it (rename-over-original changes the inode);
+      # mounting the directory avoids that entirely.
+      - ./docs:/usr/share/nginx/html:ro

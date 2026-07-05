@@ -1,27 +1,42 @@
 # Digital Business Card
 
-A mobile-first digital business card, served as a static site in Docker, with content
-editable at runtime via `config/config.json` — no rebuild needed to change your email,
-phone, or links.
+A mobile-first digital business card. Hosted for free on **GitHub Pages**, with
+content editable by committing to `docs/config.json` — no build step, no server
+to run. A Docker/VPS setup is also included as an alternative if you ever want
+to self-host instead.
 
 ## Project layout
 
 ```
-public/            static site (HTML/CSS/JS)
-  css/theme.css     design tokens (colors, gradient, fonts) — edit to restyle
-  css/main.css      layout — rarely needs edits
-  js/main.js        fetches config.json at runtime and renders the page
-config/config.json  your content (name, email, phone, links, tagline) — edit anytime
-nginx/default.conf  nginx server block
-Dockerfile
-docker-compose.yml
+docs/                site root — this is what GitHub Pages serves
+  index.html
+  config.json         your content (name, email, phone, links, tagline) — edit anytime
+  css/theme.css        design tokens (colors, gradient, fonts) — edit to restyle
+  css/main.css         layout — rarely needs edits
+  js/main.js           fetches config.json at runtime and renders the page
+  assets/              photo(s) go here
+  .nojekyll            tells GitHub Pages not to run Jekyll on this folder
+nginx/default.conf     (Docker/VPS option only)
+Dockerfile             (Docker/VPS option only)
+docker-compose.yml     (Docker/VPS option only)
 ```
 
-## Editing content (no rebuild)
+## Hosting on GitHub Pages (primary)
 
-Edit `config/config.json` on the VPS and refresh the page in your browser — it's
-volume-mounted into the container, so changes are picked up immediately (the app
-fetches it with `cache: no-store`).
+1. Push this repo to GitHub (already done if you're reading this from the repo).
+2. In the repo on GitHub: **Settings → Pages**.
+3. Under **Build and deployment → Source**, choose **Deploy from a branch**.
+4. Branch: `main`, folder: **`/docs`** → **Save**.
+5. GitHub gives you a URL like `https://Peter-Parker12.github.io/E-Biz-Card/` —
+   usually live within a minute or two. HTTPS is automatic.
+
+### Editing content
+
+Edit `docs/config.json` in the repo (directly on GitHub, or locally then
+`git push`) and it goes live as soon as GitHub Pages redeploys (usually well
+under a minute). There's no server to restart — GitHub Pages just serves the
+file directly, and the app fetches it with `cache: no-store` so you always get
+the latest version.
 
 ```json
 {
@@ -43,24 +58,39 @@ fetches it with `cache: no-store`).
 ```
 
 - `brand`/`brandSubtitle` and `tags` fill the ID-card front (brand wordmark, tag list).
-- `photo` is a URL/path to a photo; leave empty to show initials derived from `name` instead.
-- `photoPosition` controls how the photo is cropped inside its square box (it's an
-  `object-fit: cover` crop, so the photo's aspect ratio may not match the box).
-  Accepts any CSS `object-position` value, e.g. `"center"`, `"top"`, `"bottom"`,
-  `"left"`, `"right"`, or precise offsets like `"50% 20%"` to shift the visible
-  crop up/down/left/right until the part of the photo you want is in frame.
+- `photo` is a path (e.g. `assets/photo.jpg`) or full URL to a photo; leave empty
+  to show initials derived from `name` instead. If it's a path, put the actual
+  file in `docs/assets/` and commit it.
+- `photoPosition` controls how the photo is cropped inside its square box (it's
+  an `object-fit: cover` crop, so the photo's aspect ratio may not match the
+  box). Accepts any CSS `object-position` value, e.g. `"center"`, `"top"`,
+  `"bottom"`, `"left"`, `"right"`, or precise offsets like `"50% 20%"`.
 - `cardNumber` and `idNumber` are the small numbers on the front/back (purely decorative, like the reference ID badge).
 - Empty `phone` or link `url` values are automatically hidden on the page.
+- `links[].icon` picks which icon shows: `"linkedin"`, `"instagram"`, `"twitter"`, or `"website"`.
 
-## Restyling (requires rebuild)
+Keep photos reasonably small (a few hundred KB) — this loads on a phone right
+after an NFC tap, so a multi-MB DSLR export will feel slow.
 
-Edit variables in `public/css/theme.css` (colors, gradient stops, fonts), then:
+### Restyling
 
-```bash
-docker compose up -d --build
-```
+Edit variables in `docs/css/theme.css` (colors, gradient stops, fonts) and push
+— no build step needed, GitHub Pages just serves the updated file.
 
-## Deploying on the VPS
+### Custom domain (optional)
+
+If you'd rather use your own domain than the `github.io` URL:
+
+1. Add a `docs/CNAME` file containing just your domain, e.g. `card.yourdomain.com`.
+2. In your DNS provider, add a `CNAME` record for that subdomain pointing at
+   `Peter-Parker12.github.io`.
+3. In GitHub **Settings → Pages**, the custom domain field should pick this up;
+   enable **Enforce HTTPS** once the certificate provisions (can take a bit).
+
+## Alternative: self-hosting with Docker on a VPS
+
+If you'd rather run this yourself instead of using GitHub Pages, the Docker
+setup in this repo still works, serving the same `docs/` folder.
 
 Prerequisite: your domain's DNS A record already points at the VPS's IP.
 
@@ -104,7 +134,13 @@ host port for this container and let the existing reverse proxy forward to it.
 container directly to it (`"80:80"` in `docker-compose.yml`) and skip the extra
 server block.
 
-### Adding HTTPS
+Editing content this way: since the whole `docs/` directory is volume-mounted
+into the container (see `docker-compose.yml`), editing any file — including
+`docs/config.json` — is picked up immediately on refresh, no rebuild needed.
+Adding new files (like a new photo) also just works without a rebuild, since
+the mount is live.
+
+### Adding HTTPS (Docker/VPS option only)
 
 HTTPS is recommended since NFC taps open the link directly in Safari, and the
 "Save Contact" download works best on a secure origin.
@@ -138,18 +174,19 @@ no app required on their end.
 1. Buy an NTAG213 or NTAG215 NFC sticker/card (widely available on Amazon, a few
    cents to a dollar each).
 2. Install a free app on your iPhone, e.g. **NFC Tools** (by wakdev) from the App Store.
-3. Open the app → **Write** tab → **Add a record** → **URL/URI** → enter
-   `https://yourdomain.com`.
+3. Open the app → **Write** tab → **Add a record** → **URL/URI** → enter your
+   site's URL, e.g. `https://Peter-Parker12.github.io/E-Biz-Card/`.
 4. Tap **Write**, then hold the top edge of your iPhone (near the camera, where the
    NFC antenna is) against the tag until it confirms the write.
 5. Optional: use **Tools → Lock tag** to make the tag permanently read-only once
    you're confident the URL is final. (This locks the tag, not your page — you can
-   still edit `config/config.json` freely afterward.)
+   still edit `docs/config.json` freely afterward.)
 6. Test it: tap another iPhone or Android phone against the tag. It should show a
    notification banner offering to open the link in Safari/Chrome — no app needed on
    the scanning phone (NDEF URI records are natively supported by iOS 11+ and Android
    background NFC reading).
 
 Since the tag only stores the URL, and the page content is loaded live from
-`config/config.json`, you can update your email/phone/links anytime without ever
-reprogramming the tag.
+`config.json`, you can update your email/phone/links anytime without ever
+reprogramming the tag. If you later switch from the `github.io` URL to a custom
+domain, you will need to rewrite the tag with the new URL.
