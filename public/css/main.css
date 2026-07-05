@@ -21,21 +21,49 @@ body {
 
 .scroll-container {
   height: 100svh;
-  overflow-y: scroll;
-  scroll-snap-type: y mandatory;
-  overscroll-behavior-y: contain;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
   -webkit-overflow-scrolling: touch;
   perspective: 1400px;
 }
 
 .page {
-  height: 100svh;
+  height: 100%;
+  width: 100%;
+  flex: 0 0 100%;
   scroll-snap-align: start;
   scroll-snap-stop: always;
   position: relative;
   transform-style: preserve-3d;
+  transform-origin: bottom center;
   backface-visibility: hidden;
-  will-change: transform, opacity;
+  animation: page-roll-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.page:nth-of-type(1) {
+  animation-delay: 0s;
+}
+.page:nth-of-type(2) {
+  animation-delay: 0.18s;
+}
+.page:nth-of-type(3) {
+  animation-delay: 0.36s;
+}
+
+@keyframes page-roll-in {
+  from {
+    transform: rotateX(-90deg);
+    opacity: 0;
+  }
+  to {
+    transform: rotateX(0deg);
+    opacity: 1;
+  }
 }
 
 /* ---------- ID card shell (shared front/back) ---------- */
