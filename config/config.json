@@ -2,18 +2,18 @@
   "brand": "OURPEOPLE",
   "brandSubtitle": "Business Card",
   "tags": ["Art Direction", "Curation", "Strategy", "Networking"],
-  "photo": "",
-  "photoPosition": "center",
+  "photo": "assets/_MG_7956.jpg",
+  "photoPosition": "top",
   "cardNumber": "01",
   "idNumber": "770776",
   "name": "NHAT HAI DAO",
   "title": "ART MANAGER",
   "tagline": "Collecting People. Curating Possibilities",
   "email": "haidn.4v@gmail.com",
-  "phone": "",
+  "phone": "(+84) 399 498 006",
   "links": [
-    { "label": "LinkedIn", "url": "", "icon": "linkedin" },
-    { "label": "Instagram", "url": "", "icon": "instagram" }
+    { "label": "LinkedIn", "url": "https://www.linkedin.com/in/nhat-hai-dao-hanoi01/", "icon": "linkedin" },
+    { "label": "Instagram", "url": "https://www.instagram.com/hamvcl.dnh/", "icon": "instagram" }
   ],
   "credit": "design by OURPEOPLE studio"
 }
