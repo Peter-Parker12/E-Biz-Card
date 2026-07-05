@@ -1,5 +1,5 @@
 async function loadConfig() {
-  const res = await fetch("config.json", { cache: "no-store" });
+  const res = await fetch("config/config.json", { cache: "no-store" });
   return res.json();
 }
 

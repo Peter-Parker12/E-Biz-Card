@@ -10,4 +10,9 @@ services:
       # 127.0.0.1:<host-port>, see README.md.
       - "3480:80"
     volumes:
-      - ./config/config.json:/usr/share/nginx/html/config.json:ro
+      # Mounts the whole directory (not just config.json) because bind-mounting
+      # a single file can get "stuck" on the old file after git pull/editors
+      # replace it (rename-over-original changes the inode). Mounting the
+      # directory avoids that — edits are picked up without recreating the
+      # container.
+      - ./config:/usr/share/nginx/html/config:ro
