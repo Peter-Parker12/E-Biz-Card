@@ -259,6 +259,7 @@ body {
 }
 
 .id-back-brand-block {
+  flex: 0 0 auto;
   padding: 0 6%;
   margin-bottom: 6%;
   display: flex;
@@ -280,7 +281,7 @@ body {
 }
 
 .id-stripe {
-  height: 16%;
+  flex: 0 0 16%;
   background: var(--card-dark);
   width: 100%;
 }
@@ -292,7 +293,8 @@ body {
   justify-content: space-between;
   gap: 4%;
   padding: 6% 6% 0;
-  flex: 1;
+  flex: 1 1 auto;
+  min-height: 0;
 }
 
 .id-signature-strip {
@@ -334,6 +336,7 @@ body {
 }
 
 .id-back-bottom {
+  flex: 0 0 auto;
   position: relative;
   display: flex;
   align-items: flex-end;
