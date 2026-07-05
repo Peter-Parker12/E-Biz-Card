@@ -44,11 +44,49 @@ function renderExtraLink(link) {
   return a;
 }
 
+function getInitials(name) {
+  return String(name || "")
+    .trim()
+    .split(/\s+/)
+    .map((word) => word[0])
+    .slice(0, 2)
+    .join("")
+    .toUpperCase();
+}
+
 function render(config) {
-  document.getElementById("email-display").textContent = config.email || "";
-  document.getElementById("tagline-display").textContent = config.tagline || "";
-  document.getElementById("name-display").textContent = config.name || "";
-  document.getElementById("title-display").textContent = config.title || "";
+  // Front of ID card
+  document.getElementById("brand-name").textContent = config.brand || "";
+  document.getElementById("brand-subtitle").textContent = config.brandSubtitle || "";
+  document.getElementById("name-display-front").textContent = config.name || "";
+  document.getElementById("title-display-front").textContent = config.title || "";
+  document.getElementById("card-number-display").textContent = config.cardNumber || "";
+  document.getElementById("id-number-display").textContent = config.idNumber || "";
+
+  const tagsList = document.getElementById("tags-list");
+  (config.tags || []).forEach((tag) => {
+    const li = document.createElement("li");
+    li.textContent = tag;
+    tagsList.appendChild(li);
+  });
+
+  const photoImg = document.getElementById("photo-img");
+  const photoInitials = document.getElementById("photo-initials");
+  if (config.photo) {
+    photoImg.src = config.photo;
+    photoImg.hidden = false;
+    photoInitials.hidden = true;
+  } else {
+    photoInitials.textContent = getInitials(config.name);
+  }
+
+  // Back of ID card
+  document.getElementById("brand-name-back").textContent = config.brand || "";
+  document.getElementById("signature-text").textContent = config.name || "";
+  document.getElementById("id-number-back").textContent = config.idNumber || "";
+  document.getElementById("name-display-back").textContent = config.name || "";
+
+  // Contact / save page
   document.getElementById("credit-display").textContent = config.credit || "";
 
   const emailLink = document.getElementById("email-link");

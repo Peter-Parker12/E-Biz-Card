@@ -10,7 +10,7 @@ body {
   overflow: hidden;
   font-family: var(--font-body);
   color: var(--color-text-primary);
-  background: #fff;
+  background: var(--bg-color-end);
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -38,7 +38,24 @@ body {
   will-change: transform, opacity;
 }
 
-.stripe-bg {
+/* ---------- ID card shell (shared front/back) ---------- */
+
+.id-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-color-end);
+  padding: 24px;
+}
+
+.id-card {
+  width: 100%;
+  max-width: 420px;
+  aspect-ratio: var(--card-aspect-ratio);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  position: relative;
+  overflow: hidden;
   background-image: repeating-linear-gradient(
       100deg,
       rgba(255, 255, 255, var(--bg-stripe-contrast)) 0px,
@@ -47,55 +64,254 @@ body {
       rgba(0, 0, 0, 0) 34px
     ),
     linear-gradient(135deg, var(--bg-color-start), var(--bg-color-mid) 55%, var(--bg-color-end));
+  color: var(--card-text-on-card);
 }
 
-.card-front,
-.card-back {
-  height: 100%;
-  padding: 28px 24px;
+.id-watermark {
+  position: absolute;
+  inset: -20% -10%;
+  background: var(--card-bg-shade);
+  clip-path: polygon(35% 0%, 55% 0%, 20% 100%, 0% 100%);
+  opacity: 0.12;
+}
+
+.id-watermark::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  left: 30%;
+  background: var(--card-bg-shade);
+  clip-path: polygon(35% 0%, 55% 0%, 20% 100%, 0% 100%);
+}
+
+/* ---------- Front ---------- */
+
+.id-front {
+  padding: 5% 6%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-.card-front .email {
-  font-family: var(--font-script);
-  font-style: italic;
-  font-size: 1.05rem;
-  color: var(--color-text-secondary);
+.id-top {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  gap: 4%;
 }
 
-.card-front .tagline {
-  align-self: flex-end;
-  font-family: var(--font-script);
-  font-size: 1.4rem;
-  color: var(--color-text-secondary);
-  text-align: right;
-  max-width: 80%;
-}
-
-.card-back {
-  justify-content: center;
+.id-photo {
+  width: 26%;
+  aspect-ratio: 1;
+  background: var(--card-photo-bg);
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
   align-items: center;
-  text-align: center;
-  gap: 6px;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
-.card-back .name {
+.id-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.id-photo span {
+  font-family: var(--font-block);
+  font-weight: 900;
+  font-size: clamp(1.2rem, 6vw, 1.8rem);
+  color: var(--card-bg-shade);
+}
+
+.id-brand {
+  position: relative;
+  text-align: right;
+  flex: 1;
+}
+
+.id-brand-name {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: clamp(1rem, 4.2vw, 1.3rem);
+  letter-spacing: 0.01em;
+}
+
+.id-brand-sub {
   font-family: var(--font-heading);
   font-weight: 700;
-  font-size: 1.8rem;
-  letter-spacing: 0.02em;
-  margin: 0;
+  font-size: clamp(0.7rem, 2.6vw, 0.85rem);
+  color: var(--card-bg-shade);
+  margin-top: 2px;
 }
 
-.card-back .title {
-  font-family: var(--font-heading);
-  font-style: italic;
-  font-size: 1.05rem;
-  color: var(--color-text-secondary);
-  margin: 0;
+.id-tags {
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+  font-size: clamp(0.65rem, 2.4vw, 0.78rem);
+  line-height: 1.5;
+  font-weight: 600;
+  color: var(--card-text-on-card);
+  opacity: 0.85;
 }
+
+.id-bottom {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 4%;
+}
+
+.id-name-block {
+  min-width: 0;
+}
+
+.id-name {
+  font-family: var(--font-block);
+  font-weight: 900;
+  font-size: clamp(1.6rem, 9vw, 2.6rem);
+  color: var(--card-accent);
+  line-height: 0.95;
+  margin: 0;
+  word-break: break-word;
+}
+
+.id-role-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.id-title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(0.75rem, 3vw, 0.95rem);
+  text-transform: lowercase;
+}
+
+.id-number {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(0.75rem, 3vw, 0.95rem);
+  color: var(--card-accent);
+}
+
+.id-barcode {
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.barcode-bars {
+  width: clamp(70px, 22vw, 100px);
+  height: clamp(24px, 7vw, 34px);
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--card-dark) 0px,
+    var(--card-dark) 2px,
+    transparent 2px,
+    transparent 3px,
+    var(--card-dark) 3px,
+    var(--card-dark) 4px,
+    transparent 4px,
+    transparent 6px
+  );
+}
+
+.barcode-text {
+  font-size: clamp(0.5rem, 1.8vw, 0.6rem);
+  letter-spacing: 0.05em;
+  margin-top: 3px;
+  opacity: 0.85;
+}
+
+/* ---------- Back ---------- */
+
+.id-back {
+  padding: 6% 0 6%;
+  display: flex;
+  flex-direction: column;
+}
+
+.id-back-brand {
+  padding: 0 6%;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: clamp(1.1rem, 5vw, 1.5rem);
+  margin-bottom: 6%;
+}
+
+.id-stripe {
+  height: 16%;
+  background: var(--card-dark);
+  width: 100%;
+}
+
+.id-signature-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4%;
+  padding: 6% 6% 0;
+  flex: 1;
+}
+
+.id-signature-strip {
+  flex: 1;
+  height: 60%;
+  background: repeating-linear-gradient(
+      -20deg,
+      rgba(0, 0, 0, 0.08) 0 1px,
+      transparent 1px 40px
+    ),
+    #f3f1ea;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.id-signature-strip span {
+  font-family: var(--font-script);
+  font-style: italic;
+  font-size: clamp(1.2rem, 6vw, 1.7rem);
+  color: #1a1a1a;
+  transform: rotate(-4deg);
+}
+
+.id-star {
+  font-size: clamp(1.4rem, 6vw, 2rem);
+  color: var(--card-dark);
+  flex-shrink: 0;
+}
+
+.id-back-bottom {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 6% 6% 0;
+}
+
+.id-back-number {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(0.75rem, 3vw, 0.95rem);
+}
+
+.id-back-name {
+  font-family: var(--font-block);
+  font-weight: 900;
+  font-size: clamp(1.5rem, 8vw, 2.3rem);
+  color: var(--card-accent);
+}
+
+/* ---------- Contact / save page ---------- */
 
 .actions-page {
   height: 100%;

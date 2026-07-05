@@ -9,14 +9,53 @@
 </head>
 <body>
   <main class="scroll-container" id="scroll-container">
-    <section class="page card-back stripe-bg" data-page>
-      <h1 class="name" id="name-display"></h1>
-      <p class="title" id="title-display"></p>
+    <section class="page id-page" data-page>
+      <div class="id-card id-front">
+        <div class="id-watermark"></div>
+
+        <div class="id-top">
+          <div class="id-photo" id="photo-box">
+            <img id="photo-img" alt="" hidden />
+            <span id="photo-initials"></span>
+          </div>
+          <div class="id-brand">
+            <div class="id-brand-name" id="brand-name"></div>
+            <div class="id-brand-sub" id="brand-subtitle"></div>
+            <ul class="id-tags" id="tags-list"></ul>
+          </div>
+        </div>
+
+        <div class="id-bottom">
+          <div class="id-name-block">
+            <h1 class="id-name" id="name-display-front"></h1>
+            <div class="id-role-row">
+              <span class="id-title" id="title-display-front"></span>
+              <span class="id-number" id="card-number-display"></span>
+            </div>
+          </div>
+          <div class="id-barcode">
+            <div class="barcode-bars"></div>
+            <div class="barcode-text" id="id-number-display"></div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section class="page card-front stripe-bg" data-page>
-      <div class="email" id="email-display"></div>
-      <div class="tagline" id="tagline-display"></div>
+    <section class="page id-page" data-page>
+      <div class="id-card id-back">
+        <div class="id-back-brand" id="brand-name-back"></div>
+        <div class="id-stripe"></div>
+        <div class="id-signature-row">
+          <div class="id-signature-strip">
+            <span id="signature-text"></span>
+          </div>
+          <span class="id-star">&#9733;</span>
+        </div>
+        <div class="id-back-bottom">
+          <span class="id-back-number" id="id-number-back"></span>
+          <span class="id-back-name" id="name-display-back"></span>
+        </div>
+      </div>
     </section>
 
     <section class="page actions-page" data-page>

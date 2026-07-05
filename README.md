@@ -25,6 +25,12 @@ fetches it with `cache: no-store`).
 
 ```json
 {
+  "brand": "OURPEOPLE",
+  "brandSubtitle": "Business Card",
+  "tags": ["Art Direction", "Curation", "Strategy", "Networking"],
+  "photo": "",
+  "cardNumber": "01",
+  "idNumber": "770776",
   "name": "NHAT HAI DAO",
   "title": "ART MANAGER",
   "tagline": "Collecting People. Curating Possibilities",
@@ -35,7 +41,10 @@ fetches it with `cache: no-store`).
 }
 ```
 
-Empty `phone` or link `url` values are automatically hidden on the page.
+- `brand`/`brandSubtitle` and `tags` fill the ID-card front (brand wordmark, tag list).
+- `photo` is a URL/path to a photo; leave empty to show initials derived from `name` instead.
+- `cardNumber` and `idNumber` are the small numbers on the front/back (purely decorative, like the reference ID badge).
+- Empty `phone` or link `url` values are automatically hidden on the page.
 
 ## Restyling (requires rebuild)
 
