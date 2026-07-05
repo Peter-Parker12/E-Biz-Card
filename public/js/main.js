@@ -74,6 +74,7 @@ function render(config) {
   const photoInitials = document.getElementById("photo-initials");
   if (config.photo) {
     photoImg.src = config.photo;
+    photoImg.style.objectPosition = config.photoPosition || "center";
     photoImg.hidden = false;
     photoInitials.hidden = true;
   } else {

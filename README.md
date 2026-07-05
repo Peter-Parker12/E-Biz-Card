@@ -29,6 +29,7 @@ fetches it with `cache: no-store`).
   "brandSubtitle": "Business Card",
   "tags": ["Art Direction", "Curation", "Strategy", "Networking"],
   "photo": "",
+  "photoPosition": "center",
   "cardNumber": "01",
   "idNumber": "770776",
   "name": "NHAT HAI DAO",
@@ -43,6 +44,11 @@ fetches it with `cache: no-store`).
 
 - `brand`/`brandSubtitle` and `tags` fill the ID-card front (brand wordmark, tag list).
 - `photo` is a URL/path to a photo; leave empty to show initials derived from `name` instead.
+- `photoPosition` controls how the photo is cropped inside its square box (it's an
+  `object-fit: cover` crop, so the photo's aspect ratio may not match the box).
+  Accepts any CSS `object-position` value, e.g. `"center"`, `"top"`, `"bottom"`,
+  `"left"`, `"right"`, or precise offsets like `"50% 20%"` to shift the visible
+  crop up/down/left/right until the part of the photo you want is in frame.
 - `cardNumber` and `idNumber` are the small numbers on the front/back (purely decorative, like the reference ID badge).
 - Empty `phone` or link `url` values are automatically hidden on the page.
 
